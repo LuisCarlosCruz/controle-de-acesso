@@ -1,77 +1,89 @@
 package com.trybe.acc.java.controledeacesso;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /** * Main Class.*/
-
 public class Principal {
 
-  /** Método principal. */
+  /**
+   * Método principal.
+   */
   public static void main(String[] args) {
-    short inputShort;
-    ArrayList<Short> ages = new ArrayList<>();
+    Scanner scan = new Scanner(System.in);
+    ArrayList<Short> ages = new ArrayList<Short>();
+    byte option;
 
     do {
-      Scanner scanner = new Scanner(System.in);
-      System.out.println("Entre com o número correspondente à opção desejada: ");
-      System.out.println("1 - Acessar o estabelecimento");
-      System.out.println("2 - Finalizar sistema e mostrar relatório");
-      String input = scanner.next();
-      inputShort = Short.parseShort(input);
-
-      if (inputShort == 1) {
+      System.out.println("Entre com o número correspondente à opção desejada:\n"
+              + "1 - Acessar o estabelecimento\n"
+              + "2 - Finalizar sistema e mostrar relatório");
+      option = scan.nextByte();
+      if (option == 1) {
         System.out.println("Entre com a idade:");
-        String inputAge = scanner.next();
-        short age = Short.parseShort(inputAge);
-
-        VerifyAge verifyAge = new VerifyAge();
-        System.out.println(verifyAge.idade(age));
-
+        short age = scan.nextShort();
         ages.add(age);
+        System.out.println(verifyAge(age));
+      } else if (option == 2) {
+        break;
+      } else {
+        System.out.println("Entre com uma opção válida");
       }
+    } while (option != 2);
 
-      if (inputShort != 1 && inputShort != 2) {
-        System.out.println("Entre com uma opção válida!");
-      }
+    if (ages.size() != 0) {
+      finalReport(ages);
+    }
+    scan.close();
+  }
 
-    } while (inputShort != 2);
+  /**
+   * Método de verificação da idade.
+   */
+  public static String verifyAge(Short age) {
+    if (age < 18) {
+      return "Pessoa cliente menor de idade, catraca liberada!";
+    } else if (age < 50) {
+      return "Pessoa adulta, catraca liberada!";
+    } else {
+      return "Pessoa adulta a partir de 50, catraca liberada!";
+    }
+  }
 
-    // RELATORIO
-
-    int menores = 0;
-    int adultas = 0;
-    int idosas = 0;
+  /**
+   * Método de relatório.
+   */
+  public static void finalReport(ArrayList<Short> ages) {
+    int under = 0;
+    int adult = 0;
+    int over = 0;
+    int total = ages.size();
 
     for (short age : ages) {
       if (age < 18) {
-        menores++;
+        under += 1;
       } else if (age < 50) {
-        adultas++;
+        adult += 1;
       } else {
-        idosas++;
+        over += 1;
       }
-
     }
 
-    DecimalFormat percentage = new DecimalFormat("#.##%");
-    float percentageMenores = (float) menores / ages.size();
-    float percentageAdultas = (float) adultas / ages.size();
-    float percentageApartirDe50 = (float) idosas / ages.size();
+    double underPer = (1000 * under / total / 10.0);
+    double adultPer = (1000 * adult / total / 10.0);
+    double overPer = (1000 * over / total / 10.0);
 
-    System.out.println("----- Quantidade -----");
-    System.out.println("menores: " + menores);
-    System.out.println("adultas: " + adultas);
-    System.out.println("a partir de 50: " + idosas);
-
-    System.out.println("\n----- Percentual -----");
-    System.out.println("menores: " + percentage.format(percentageMenores));
-    System.out.println("adultas: " + percentage.format(percentageAdultas));
-    System.out.println("a partir de 50: " + percentage.format(percentageApartirDe50));
-
-    System.out.println("\nTOTAL: " + ages.size());
-
+    System.out.println("----- Quantidade -----\n"
+            + "menores: " + under + "\n"
+            + "adultas: " + adult + "\n"
+            + "a partir de 50: " + over + "\n"
+            + "\n"
+            + "----- Percentual -----\n"
+            + "menores: " + underPer + "%\n"
+            + "adultas: " + adultPer + "%\n"
+            + "a partir de 50: " + overPer + "%\n"
+            + "\n"
+            + "TOTAL: " + total);
   }
-}
 
+}
