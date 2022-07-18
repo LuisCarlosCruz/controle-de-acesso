@@ -1,8 +1,8 @@
 package com.trybe.acc.java.controledeacesso;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /** * Main Class.*/
 
@@ -41,9 +41,14 @@ public class Principal {
     int menores = 0, adultas = 0, aPartirDe50 = 0;
 
     for (short age : ages) {
-      if (age < 18) menores++;
-      if (age < 50) adultas++;
-      aPartirDe50++;
+      if (age < 18) {
+        menores++;
+      } else if (age < 50) {
+        adultas++;
+      } else {
+        aPartirDe50++;
+      }
+
     }
 
     DecimalFormat percentage = new DecimalFormat("#.##%");
