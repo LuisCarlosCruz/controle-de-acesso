@@ -32,13 +32,17 @@ public class Principal {
         ages.add(age);
       }
 
-      if (inputShort != 1 && inputShort != 2) System.out.println("Entre com uma opção válida!");
+      if (inputShort != 1 && inputShort != 2) {
+        System.out.println("Entre com uma opção válida!");
+      }
 
     } while (inputShort != 2);
 
     // RELATORIO
 
-    int menores = 0, adultas = 0, aPartirDe50 = 0;
+    int menores = 0;
+    int adultas = 0;
+    int idosas = 0;
 
     for (short age : ages) {
       if (age < 18) {
@@ -46,7 +50,7 @@ public class Principal {
       } else if (age < 50) {
         adultas++;
       } else {
-        aPartirDe50++;
+        idosas++;
       }
 
     }
@@ -54,17 +58,17 @@ public class Principal {
     DecimalFormat percentage = new DecimalFormat("#.##%");
     float percentageMenores = (float) menores / ages.size();
     float percentageAdultas = (float) adultas / ages.size();
-    float percentageAPartirDe50 = (float) aPartirDe50 / ages.size();
+    float percentageApartirDe50 = (float) idosas / ages.size();
 
     System.out.println("----- Quantidade -----");
     System.out.println("menores: " + menores);
     System.out.println("adultas: " + adultas);
-    System.out.println("a partir de 50: " + aPartirDe50);
+    System.out.println("a partir de 50: " + idosas);
 
     System.out.println("\n----- Percentual -----");
     System.out.println("menores: " + percentage.format(percentageMenores));
     System.out.println("adultas: " + percentage.format(percentageAdultas));
-    System.out.println("a partir de 50: " + percentage.format(percentageAPartirDe50));
+    System.out.println("a partir de 50: " + percentage.format(percentageApartirDe50));
 
     System.out.println("\nTOTAL: " + ages.size());
 
