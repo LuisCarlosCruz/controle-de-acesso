@@ -1,7 +1,5 @@
 # Boas vindas ao repositório do desafio da Aceleração Java!
 
-# Requisitos do desafio
-
 # Descrição do desafio: Sistema de Controle de Acesso
 
 Que sucesso! 👏 Aqui temos um sistema de controle de acesso inteligente para um estabelecimento. Ficou combinado com o cliente que o sistema, ao ser finalizado, deve apresentar um relatório que divida as pessoas que acessaram o estabelecimento em três categorias:
